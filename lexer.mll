@@ -33,4 +33,4 @@ rule read =
     | '.'     { DOT }
     | ','     { COMMA }
     | eof     { EOF }
-    | _       { raise (SyntaxError ("Unexpected char: " ^ Lexing.lexeme lexbuf)) }
+    | _       { read lexbuf }
