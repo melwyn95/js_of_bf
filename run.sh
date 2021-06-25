@@ -1,0 +1,1 @@
+dune exec ./js_of_bf.exe examples/hello_world.bf > examples/hello_world.js

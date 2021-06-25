@@ -41,4 +41,4 @@ let rec to_js_commands bf =
   | Loop bf -> acc ^ "\n" ^ Printf.sprintf "while (tape.get_cell() > 0) { %s\n }" (to_js_commands bf)
   ) "" bf
 
-let to_js bf = Printf.sprintf "%s \n%s \n%s" prelude (to_js_commands bf) flush
+let to_js bf = Printf.sprintf "%s \n%s \n\n%s" prelude (to_js_commands bf) flush
