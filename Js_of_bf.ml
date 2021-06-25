@@ -1,13 +1,14 @@
 open Core
 open Lexing
 
-let parse_with_error lexbuf = Parser.prog Lexer.read lexbuf
+let compile bf = BF.to_js bf
 
-let rec parse_and_compile lexbuf =
-  match parse_with_error lexbuf with
-  | Some _ ->
-    print_endline "Done...";
-    parse_and_compile lexbuf
+let parse lexbuf = Parser.prog Lexer.read lexbuf
+
+let parse_and_compile lexbuf =
+  match parse lexbuf with
+  | Some bf ->
+    print_endline (compile bf);
   | None -> ()
 
 let loop filename () =
