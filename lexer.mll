@@ -2,8 +2,6 @@
 open Lexing
 open Parser
 
-exception SyntaxError of string
-
 let next_line lexbuf =
   let pos = lexbuf.lex_curr_p in
   lexbuf.lex_curr_p <-
@@ -12,7 +10,6 @@ let next_line lexbuf =
     }
 }
 
-let white = [' ' '\t']+
 let newline = '\r' | '\n' | "\r\n"
 
 let plus = '+' +
@@ -22,12 +19,11 @@ let lt = '<' +
 
 rule read = 
     parse
-    | white   { read lexbuf }
     | newline { next_line lexbuf; read lexbuf }
-    | plus    { PLUS (Lexing.lexeme lexbuf) }
-    | minus   { MINUS (Lexing.lexeme lexbuf) }
-    | gt      { MOVE_RIGHT (Lexing.lexeme lexbuf) }
-    | lt      { MOVE_LEFT (Lexing.lexeme lexbuf) }
+    | plus    as p { PLUS (String.length p) }
+    | minus   as m { MINUS (String.length m) }
+    | gt      as g { MOVE_RIGHT (String.length g) }
+    | lt      as l { MOVE_LEFT (String.length l) }
     | '['     { OPEN_SQUARE_BRACE }
     | ']'     { CLOSE_SQUARE_BRACE }
     | '.'     { DOT }

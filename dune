@@ -3,4 +3,5 @@
 (menhir (modules parser))
 
 (executable
-  (name      js_of_bf))
+  (name      js_of_bf)
+  (libraries core))
