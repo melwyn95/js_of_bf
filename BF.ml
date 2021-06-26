@@ -27,7 +27,7 @@ const tape = Tape();
 
 "
 
-let flush = "console.log(tape.flush())"
+let flush = "tape.flush()"
 
 let rec to_js_commands bf = 
   List.fold_left(fun acc bf -> 
